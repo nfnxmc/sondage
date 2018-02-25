@@ -16,17 +16,16 @@ public class ChoixDAOImpl implements ChoixDAO {
 	private SessionFactory sessionFactory;
 
 	@Override
-	public Choix modifier(Choix choix) {
+	public int modifier(Choix choix) {
 		Session session = this.sessionFactory.getCurrentSession();
 		@SuppressWarnings("unchecked")
 		TypedQuery<Choix> query = (TypedQuery<Choix>) session.getNamedQuery("modifierChoix");
 		query.setParameter("titre", choix.getTitre());
-		Choix _choix = query.getSingleResult();
-		return _choix;
+		return query.getMaxResults();
 	}
 
 	@Override
-	public Choix creer(Choix choix) {
+	public int creer(Choix choix) {
 		Session session = this.sessionFactory.getCurrentSession();
 		
 		@SuppressWarnings("unchecked")
@@ -34,18 +33,18 @@ public class ChoixDAOImpl implements ChoixDAO {
 		query.setParameter("titre", choix.getTitre());
 		query.setParameter("score", choix.getScore());
 		
-		Choix _choix = query.getSingleResult();
-		return _choix;
+		return  query.getMaxResults();
 	}
 
 	@Override
-	public Choix supprimer(Choix choix) {
+	public int supprimer(Choix choix) {
 		Session session = this.sessionFactory.getCurrentSession();
 		@SuppressWarnings("unchecked")
 		TypedQuery<Choix> query = (TypedQuery<Choix>) session.getNamedQuery("supprimerChoix");
 		query.setParameter("titre", choix.getTitre());
-		Choix _choix = query.getSingleResult();
-		return _choix;
+		
+		return query.getMaxResults();
+
 	}
 
 	@Override

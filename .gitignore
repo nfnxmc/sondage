@@ -1,2 +1,5 @@
 back/target
 .settings \n .classpath
+back/.settings
+back/.project
+

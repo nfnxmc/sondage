@@ -114,7 +114,11 @@
 			<artifactId>h2</artifactId>
 			<scope>test</scope>
 		</dependency>
-				
+		<dependency>
+			<groupId>com.github.amdelamar</groupId>
+			<artifactId>jhash</artifactId>
+			<version>2.0.0</version>
+		</dependency>
 				
 	</dependencies>
 	<repositories>
@@ -134,6 +138,12 @@
 				<enabled>false</enabled>
 			</snapshots>
 		</repository>
+
+    	<repository>
+        	<id>jitpack.io</id>
+       		<url>https://jitpack.io</url>
+    	</repository>
+
 	</repositories>
 	
 	<pluginRepositories>

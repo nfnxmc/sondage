@@ -1,12 +1,17 @@
 package sondage.models.user;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.Table;
+import javax.persistence.UniqueConstraint;
 
 @Entity
-@Table(name="User")
+@Table(name="User", uniqueConstraints=@UniqueConstraint(columnNames={"Email"}))
 @NamedQueries({
 	@NamedQuery(name="createUser", query="insert into User(name, email, password) values (:name, :email, :password)"),
 	@NamedQuery(name="deleteUser", query="delete from User where email=:email and password=:password"),
@@ -15,8 +20,14 @@ import javax.persistence.Table;
 	@NamedQuery(name="findUserByName", query="select from User where name=:name")
 })
 public class User {
+	@Id
+	@GeneratedValue(strategy=GenerationType.AUTO)
+	
+	@Column
 	private String name;
+	@Column(name="Email")
 	private String email;
+	@Column
 	private String password;
 	
 	public User(){}

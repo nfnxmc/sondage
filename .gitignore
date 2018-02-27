@@ -1,3 +1,4 @@
+back/**/*.class
 back/target
 .settings \n .classpath
 back/.settings

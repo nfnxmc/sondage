@@ -32,6 +32,12 @@ public class User {
 	
 	public User(){}
 
+	public User(String _name, String _email, String _password) {
+		this.name = _name;
+		this.email = _email;
+		this.password = _password;
+	}
+
 	public String getName() {
 		return name;
 	}

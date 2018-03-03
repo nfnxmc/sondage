@@ -1,4 +1,4 @@
-package sondage.models.choice;
+package poll.models.poll;
 
 import java.util.List;
 
@@ -25,7 +25,6 @@ public class ChoiceDAOImpl implements ChoiceDAO {
 		TypedQuery<Choice> query = (TypedQuery<Choice>) session.getNamedQuery("createChoice");
 		query.setParameter("name", c.getName());
 		query.setParameter("pollId", c.getPollId());
-		query.setParameter("question", c.getQuestion());
 		query.setParameter("score", c.getScore());
 		query.executeUpdate();
 

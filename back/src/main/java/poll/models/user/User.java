@@ -1,14 +1,21 @@
-package sondage.models.user;
+package poll.models.user;
 
+import java.util.List;
+
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.UniqueConstraint;
+
+import poll.models.poll.Poll;
 
 @Entity
 @Table(name="User", uniqueConstraints=@UniqueConstraint(columnNames={"Email"}))
@@ -29,6 +36,9 @@ public class User {
 	private String email;
 	@Column
 	private String password;
+	
+	@OneToMany(mappedBy="User", cascade=CascadeType.REMOVE, fetch=FetchType.LAZY)
+	private List<Poll> polls;
 	
 	public User(){}
 
@@ -61,6 +71,21 @@ public class User {
 	public void setPassword(String password) {
 		this.password = password;
 	}
+	
+	@Override
+	public String toString() {
+		return this.getEmail() + "," + this.getPassword();
+	}
+
+	public List<Poll> getPolls() {
+		return polls;
+	}
+
+	public void setPolls(List<Poll> polls) {
+		this.polls = polls;
+	}
+	
+	
 	
 	
 }

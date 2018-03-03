@@ -1,4 +1,4 @@
-package sondage.models.user;
+package poll.models.user;
 
 public class UserNotFoundException extends Exception {
 

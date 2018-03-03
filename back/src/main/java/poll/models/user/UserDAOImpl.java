@@ -1,4 +1,4 @@
-package sondage.models.user;
+package poll.models.user;
 
 import javax.persistence.TypedQuery;
 import javax.transaction.Transactional;

@@ -1,4 +1,4 @@
-package sondage.models.choice;
+package poll.models.poll;
 
 import java.util.List;
 

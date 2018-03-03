@@ -1,4 +1,4 @@
-package sondage.models.user;
+package poll.models.user;
 
 import org.springframework.beans.factory.annotation.Autowired;
 

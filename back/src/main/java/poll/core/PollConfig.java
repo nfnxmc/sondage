@@ -38,7 +38,7 @@ public class PollConfig {
 	public SessionFactory getSessionFactory(DataSource dataSource){
 		LocalSessionFactoryBuilder sfb = 
 				new LocalSessionFactoryBuilder(dataSource);
-		sfb.scanPackages("poll.*");
+		sfb.scanPackages("poll.models.*");
 		return sfb.buildSessionFactory();
 	}
 	

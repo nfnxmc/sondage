@@ -7,19 +7,21 @@ import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 
 import poll.models.user.User;
 import poll.security.CustomAuthenticationProvider;
 
+@Controller
 public class UserController {
 	
 
 	@Autowired 
 	private CustomAuthenticationProvider authenticationProvider;
 
-	@PostMapping(value="/login")
+	@PostMapping(value="/user/login")
 	public String processLogin(@RequestBody User reqUser, HttpServletRequest req){
 		Authentication authentication = null;
 		UsernamePasswordAuthenticationToken token = 

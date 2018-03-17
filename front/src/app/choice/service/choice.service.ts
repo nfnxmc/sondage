@@ -34,7 +34,6 @@ export class ChoiceService {
     }
   ];
   fakeChoices(): Observable<any>{
-    
     return Observable.of(this.fakedata);
   }
   constructor() { }

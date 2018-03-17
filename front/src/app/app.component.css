@@ -1,8 +1,14 @@
 main {
   margin-top: 12%;
 }
-
-app-poll {
-  display: inline-block;
-  margin-top: 5%;
+#toolbar, #poll-list, #selected-poll, .col-sm-3{
+  border: 1px solid #33312e;
 }
+input {
+  border: hidden;
+  margin-top: 3%;
+}
+.row {
+  width: 100%;
+}
+

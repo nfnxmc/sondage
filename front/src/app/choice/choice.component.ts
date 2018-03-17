@@ -16,5 +16,6 @@ export class ChoiceComponent implements OnInit {
   }
   constructor(){}
 
+  updateScore(){}
 
 }

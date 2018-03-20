@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit , Input } from '@angular/core';
 import { ChoiceService } from '../../choice/service/choice.service';
 import { Subscription } from 'rxjs/Subscription';
 import * as d3 from "d3";
@@ -13,7 +13,7 @@ export class ChartComponent implements OnInit {
   private choices:Array<any>;
  
   view = [300, 220];
-  results = [];
+  @Input() results = [];
   // options
   showXAxis = true;
   showYAxis = true;
@@ -31,13 +31,9 @@ export class ChartComponent implements OnInit {
   constructor(private cs: ChoiceService) { }
 
   ngOnInit() {
-    this.cs.fakeChoices().subscribe(choices => {
-      this.choices = choices;
-      this.results = choices.map((c) => {return {name: c.name, value: c.score}});
-    }).unsubscribe();
-    
+
   }
 
-  createChart(choices){
+  updateChart(event){
   }
 }

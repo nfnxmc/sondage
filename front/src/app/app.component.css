@@ -11,4 +11,20 @@ input {
 .row {
   width: 100%;
 }
+.col-sm-3 {
+  border-top: none;
+  border-bottom-width: 0;
+  border-left: none;
+}
+#poll-list {
+  border-right: none;
+  border-top: none;
+}
 
+#toolbar {
+  border-right: none;
+}
+
+#selected-poll {
+  border-top: none;
+}

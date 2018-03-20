@@ -2,11 +2,16 @@ import { Injectable } from '@angular/core';
 import { ChoiceComponent } from '../choice.component';
 import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/observable/of';
+import 'rxjs/add/observable/range';
+import 'rxjs/add/operator/map';
+import { HttpClient } from '@angular/common/http';
 
-
+import * as faker from 'faker';
 
 @Injectable()
 export class ChoiceService {
+  private id = 0;
+  private pollid = -1;
   fakedata = [
     {
       'id': 1,
@@ -23,7 +28,7 @@ export class ChoiceService {
     {
       'id': 4,
       'name': 'Choice 3',
-      'score': 550,
+      'score': 1550,
       'pollId':0
     },
     {
@@ -33,13 +38,38 @@ export class ChoiceService {
       'pollId':0
     }
   ];
-  fakeChoices(): Observable<any>{
-    return Observable.of(this.fakedata);
+  
+
+  randomInt(min, max){
+    return Math.floor(Math.random() * (max - min + 1)) + min;
   }
-  constructor() { }
+  private fakeChoice() {
+    let choice = { id: this.id, name: faker.name.firstName(), score: this.randomInt(0, 500), pollId: this.pollid};
+    this.id = this.id + 1;
+    //console.log(choice);
+    return choice;
+  }
+
+  fakeChoices(nc: number){
+    this.pollid = this.pollid + 1;
+    return (new Array<any>(nc).fill(0)).map(i => this.fakeChoice());
+  }
+
+  fakePolls():Observable<any>{
+    let npoll = this.randomInt(1,20);
+    let sizer = (new Array(npoll)).fill(0)
+    let ownerId = 0;
+    return Observable.of(sizer.map( i => {
+      ownerId = ownerId + 1;
+      return ({id: this.pollid, ownerId: ownerId, question: faker.lorem.words(2)+'?', choices: this.fakeChoices(this.randomInt(2, 5))});
+    }));
+  }
+  constructor(private http: HttpClient) {
+  }
 
 
   updateChoiceScore(cid: number){
-    throw new Error("not implemented yet!!");
+    let options = {xrs_token: 'Bearer' + localStorage.getItem('XSR_Token')}
+    this.http.post(`/update-choice/?cid={{this.cid}}&score={{this.score}}`, options);
   }
 }

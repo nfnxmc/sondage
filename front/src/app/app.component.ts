@@ -1,5 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { ChoiceService } from './choice/service/choice.service';
+import { Observable } from 'rxjs/Observable';
+import 'rxjs/add/operator/filter';
 
 @Component({
   selector: 'app-root',
@@ -7,16 +9,40 @@ import { ChoiceService } from './choice/service/choice.service';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent implements OnInit {
-  private selectedPoll = {};
-  private polls: Array<any> = [{question: 'hi?'}, {question: 'hi?'},{question: 'hi?'},{question: 'hi?'}];;
+  private selectedPoll : any;
+  private polls: Array<any>;
+  private _polls: Array<any>;
+  @Input('keywords') keywords: string;
 
   constructor(private cs: ChoiceService){}
 
   ngOnInit(){
-    this.cs.fakeChoices().subscribe(choices => {
-      this.selectedPoll = { _choices: choices, _ownerId: 0, _id: 0};
-    });
+    this.cs.fakePolls().subscribe(
+      data => {this.polls = data; this._polls = data; this.selectedPoll = data[0];}
+    )
   }
 
-  findPolls($event){}
+  filterPolls($event){
+    if(this.keywords){
+      this.polls = this._polls.filter(poll => {
+        return poll.question.includes(this.keywords);
+      })
+    }
+    else {
+      this.polls = this._polls;
+    }
+  }
+  reloadChoices(event){
+    this.selectedPoll = this.selectedPoll.map(p =>({
+      choices: event, 
+      ownerId:p.ownerId,
+      id: p.id,
+      question: p.question
+    }));
+    console.log("selected poll => ", this.selectedPoll);
+  }
+  setSelectedPoll(event) {
+    this.selectedPoll = this._polls.filter( poll => poll.question === event.target.innerText)[0];
+    //console.log(this.selectedPoll);
+  }
 }

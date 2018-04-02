@@ -1,0 +1,45 @@
+<app-navbar></app-navbar>
+<main role="main" class="container">   
+    <div class="row">
+      <div id="toolbar" class="row">
+        <div class="col-sm-3">
+          <span class="glyphicon glyphicon-plus" >
+            <button class="btn btn-link"><i class="fas fa-plus"></i>   Create poll</button>
+          </span>
+        </div>
+        <div class="col-sm-3">
+          <input type="text" [(ngModel)]="keywords" placeholder="poll question?" (keyup)="filterPolls($event)">
+        </div>
+        <div class="col-sm-3">
+          <button class="btn btn-link">My polls</button>
+        </div>
+        <div class="col-sm-3">
+            <span class="glyphicon glyphicon-minus" >
+                <button class="btn btn-link"> <i class="fas fa-minus"></i>   Delete poll</button>
+            </span>
+        </div>
+      </div> <!--  toolbar -->
+      <div class="polls row">
+        <div class="col-sm-4" id="poll-list">
+          <table class="table table-stripped" width="100%">
+            <tbody>
+              <tr *ngFor="let poll of polls" id="{{poll.id}}" (click)="setSelectedPoll($event)">
+                <td text-align="left">
+                  {{poll.question}}
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div> <!-- poll list -->
+        <div class="col-sm-8" id="selected-poll">
+          <app-poll 
+            [choices]="selectedPoll.choices" 
+            [id]="selectedPoll.id"
+            [ownerId]="selectedPoll.ownerId"
+            [question]="selectedPoll.question"
+            (_scores)="reloadChoices($event)">
+          </app-poll>
+        </div>
+      </div>
+    </div>
+</main><!-- /.container -->

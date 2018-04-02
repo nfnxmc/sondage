@@ -8,7 +8,7 @@ import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 
-@Entity
+@Entity(name="Choice")
 @Table(name="Choice")
 @NamedQueries({
 	@NamedQuery(name="updateChoice", query="update Choice set score = :score where name =:name and pollId = :pollId"),

@@ -21,7 +21,7 @@ import poll.models.poll.Poll;
 @Table(name="User", uniqueConstraints=@UniqueConstraint(columnNames={"Email"}))
 @NamedQueries({
 	@NamedQuery(name="createUser", query="insert into User(name, email, password) values (:name, :email, :password)"),
-	@NamedQuery(name="deleteUser", query="delete from User where email=:email and password=:password"),
+	@NamedQuery(name="deleteUser", query="delete user from User where user.email=:email and user.password=:password"),
 	@NamedQuery(name="updateUser", query="update User set password=:password where email=:email"),
 	@NamedQuery(name="findUserByEamil", query="select from User where email=:email"),
 	@NamedQuery(name="findUserByName", query="select from User where name=:name")
@@ -37,7 +37,7 @@ public class User {
 	@Column
 	private String password;
 	
-	@OneToMany(mappedBy="User", cascade=CascadeType.REMOVE, fetch=FetchType.LAZY)
+	@OneToMany(cascade=CascadeType.REMOVE, fetch=FetchType.LAZY)
 	private List<Poll> polls;
 	
 	public User(){}

@@ -1,0 +1,30 @@
+.poll-col {
+    display: inline;
+    height: 220px;
+    margin-top:  2%;
+    margin-bottom: 2%;
+}
+.histogram {
+    height: 220px;
+    
+    border: 1px solid black;
+}
+
+
+.poll {
+    width: 480px;
+    height:300px;
+    margin-bottom: 5%;
+}
+
+.btn-warning, .btn-success {
+    display: inline-block;
+    vertical-align: top;
+    margin-right: 2%;
+}
+.btn-warning {
+    margin-left: 14%;
+}
+canvas {
+    margin: 5px;
+}

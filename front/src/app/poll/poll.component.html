@@ -1,19 +1,33 @@
 <div class="poll row">
   <div class="col-sm-12" style="text-align:center"><h4>{{question}}</h4></div>
-  <div class="col-sm-4 row poll-col"> 
+  <div class="col-sm-10 offset-1 row poll-col" *ngIf="!viewresult"> 
     <div class="col-sm-12" *ngFor="let c of choices; let i=index;">
       <app-choice [name]="c.name" [score]="c.score" [id]="c.id" 
-        [pollId]="c.pollId" [style.color]="colors[i%3]"
-        ng-disabled="disabled" (newScore)="loadNewScore($event)">
+        [pollId]="c.pollId" [selected]="c.selected"
+        ng-disabled="false" (choiceSelected)="choiceSelected($event)">
           {{c.name}}
       </app-choice>
     </div>
   </div>
-  <div class="col-sm-8 poll-col histogram" >
-    <app-chart [results]="results()"></app-chart>
+  <div *ngIf="viewresult" class="row col-sm-12" >
+    <div *ngFor="let c of choices" class="row col-sm-12">
+        <div  class="row col-sm-12 result">
+            <div class="col-sm-3 result">{{c.name}}</div>
+            <div class="col-sm-9 offset-1 result">
+              <progress-bar [value]="100*c.score/totalScore" [max]="100" title="{{c.score}}"></progress-bar>
+            </div>
+        </div>
+    </div>
   </div>
-  <div class="col-sm-12 row">
-      <button class="btn btn-warning btn-sm right-block">Cancel</button>
-      <button class="btn btn-success btn-sm right-block">Validate</button>
+  <div  class="col-sm-12" id="thank">
+      <span *ngIf="isVoted()" style="color:green">Thanks you for your vote</span>
+      <span *ngIf="!isVoted()">Please vote this poll</span>
+  </div>
+  
+  <div class="col-sm-12 row" id="validations">
+      <button class="btn btn-warning btn-sm right-block" [disabled]="isVoted()" (click)="cancelSelection()">Cancel</button>
+      <button class="btn btn-success btn-sm right-block" [disabled]="isVoted()" (click)="validateSelection()">Validate</button>
+      
+      <button class="btn btn-link btn-info" (click)="showResults()"> View results of votes</button>
   </div>
 </div>

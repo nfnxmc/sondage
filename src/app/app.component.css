@@ -1,0 +1,30 @@
+main {
+  margin-top: 12%;
+}
+#toolbar, #poll-list, #selected-poll, .col-sm-3{
+  border: 1px solid #33312e;
+}
+input {
+  border: hidden;
+  margin-top: 3%;
+}
+.row {
+  width: 100%;
+}
+.col-sm-3 {
+  border-top: none;
+  border-bottom-width: 0;
+  border-left: none;
+}
+#poll-list {
+  border-right: none;
+  border-top: none;
+}
+
+#toolbar {
+  border-right: none;
+}
+
+#selected-poll {
+  border-top: none;
+}

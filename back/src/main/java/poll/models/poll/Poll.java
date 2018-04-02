@@ -14,7 +14,7 @@ import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
-@Entity
+@Entity(name="Poll")
 @Table(name="Poll")
 @NamedQueries({
 	@NamedQuery(name="deletePoll", query="delete from Poll where Id =:pollId"),
@@ -31,7 +31,7 @@ public class Poll {
 	@Column(name="Question")
 	public String question;
 	
-	@OneToMany(mappedBy="Poll", cascade=CascadeType.ALL, fetch=FetchType.EAGER)
+	@OneToMany(cascade=CascadeType.ALL, fetch=FetchType.EAGER)
 	public List<Choice> choices;
 	
 	@Column(name="ownerId")

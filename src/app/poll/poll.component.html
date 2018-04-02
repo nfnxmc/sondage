@@ -1,0 +1,19 @@
+<div class="poll row">
+  <div class="col-sm-12" style="text-align:center"><h4>{{question}}</h4></div>
+  <div class="col-sm-4 row poll-col"> 
+    <div class="col-sm-12" *ngFor="let c of choices; let i=index;">
+      <app-choice [name]="c.name" [score]="c.score" [id]="c.id" 
+        [pollId]="c.pollId" [style.color]="colors[i%3]"
+        ng-disabled="disabled" (newScore)="loadNewScore($event)">
+          {{c.name}}
+      </app-choice>
+    </div>
+  </div>
+  <div class="col-sm-8 poll-col histogram" >
+    <app-chart [results]="results()"></app-chart>
+  </div>
+  <div class="col-sm-12 row">
+      <button class="btn btn-warning btn-sm right-block">Cancel</button>
+      <button class="btn btn-success btn-sm right-block">Validate</button>
+  </div>
+</div>

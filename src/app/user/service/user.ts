@@ -2,8 +2,14 @@
 export class User {
     private isLoggedIn = false;
 
-    constructor(private _email:string, private _password:string, private _name:string){}
+    constructor(private _id: number, private _email:string, private _password:string, private _name:string){}
 
+    set id(id:number){
+        this._id = id;
+    }
+    get id(): number {
+        return this._id;
+    }
     set email(email:string){
         this._email = email;
     }

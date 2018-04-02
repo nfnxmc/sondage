@@ -1,36 +1,43 @@
-import { BrowserModule } from '@angular/platform-browser';
-import { NgModule } from '@angular/core';
+import { BrowserModule} from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { FormsModule } from '@angular/forms';
+import { NgModule } from '@angular/core';
+import { RouterModule } from '@angular/router';
 
 import { AppComponent } from './app.component';
 import { NavbarComponent } from './navbar/navbar.component';
-import { UserComponent } from './user/user.component';
+import { AuthService } from './security/auth.service';
+import { ReactiveFormsModule, FormsModule } from '@angular/forms';
+import { routes } from './routes';
+import { RegistrationComponent } from './registration/registration.component';
+import { HttpClientModule } from '@angular/common/http';
+import { UserService } from './services/user.service';
 import { PollComponent } from './poll/poll.component';
 import { ChoiceComponent } from './choice/choice.component';
-import { ChoiceService } from './choice/service/choice.service';
-import { NgxChartsModule } from '@swimlane/ngx-charts';
-import { ChartComponent } from './poll/chart/chart.component';
-import { HttpClientModule } from '@angular/common/http';
+import { PollManagementComponent } from './poll-management/poll-management.component';
+import { ChoiceService } from './choice/choice.service';
+import { ProgressBarModule } from 'ngx-progress-bar';
+
 
 @NgModule({
   declarations: [
-    ChoiceComponent,
     AppComponent,
     NavbarComponent,
-    UserComponent,
+    RegistrationComponent,
     PollComponent,
-    ChartComponent,
+    ChoiceComponent,
+    PollManagementComponent
   ],
-  exports: [ChoiceComponent],
   imports: [
+    ProgressBarModule,
+    HttpClientModule,
     BrowserModule,
-    NgxChartsModule,
+    RouterModule,
+    ReactiveFormsModule,
+    FormsModule,
     BrowserAnimationsModule,
-    FormsModule, 
-    HttpClientModule
+    RouterModule.forRoot(routes,  {useHash:true})
   ],
-  providers: [ChoiceService],
+  providers: [AuthService, UserService, ChoiceService ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

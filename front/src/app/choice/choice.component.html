@@ -1,1 +1,3 @@
-<button type="button" class= "btn btn-light btn-sm col-sm-12" (click)= "increment()" >{{name}}</button>
+<button type="button" 
+    class= "btn btn-light btn-sm col-sm-12" 
+    [ngClass]= "{'selected': selected}" (click)= "changeclass()">{{name}}</button>

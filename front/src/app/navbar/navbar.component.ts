@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { FormGroup, FormControl, Validators } from '@angular/forms';
+import { AuthService } from '../security/auth.service';
 
 @Component({
   selector: 'app-navbar',
@@ -6,9 +8,27 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./navbar.component.css']
 })
 export class NavbarComponent implements OnInit {
-  constructor() { }
+  isLoggedIn: boolean;
+  email = new FormControl('', [Validators.required, Validators.minLength(3)]);
+  password = new FormControl('', [Validators.required, Validators.minLength(5)]);
+  loginForm: FormGroup;
+
+  constructor(private auth: AuthService) { }
 
   ngOnInit() {
+    this.loginForm = this.buildForm();
+  }
+
+  buildForm(){
+    return new FormGroup({
+      email: this.email, 
+      password: this.password
+    });
+  }
+
+  login(){
+    this.auth.login({email:this.email.value, password: this.password.value});
+    this.loginForm.reset();
   }
 
 }

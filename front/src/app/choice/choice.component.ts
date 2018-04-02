@@ -1,5 +1,5 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
-import { ChoiceService } from './service/choice.service';
+import { ChoiceService } from './choice.service';
 import { Observable } from 'rxjs/Observable';
 
 @Component({
@@ -12,20 +12,27 @@ export class ChoiceComponent implements OnInit {
   @Input('name') name : string;
   @Input('score') score: number;
   @Input('pollId') pollId: number;
-  @Output("newScore") newScore = new EventEmitter<any>();
+  @Output("choiceSelected") choiceSelected = new EventEmitter<any>();
+  @Input("selected") selected : boolean;
 
   ngOnInit(): void {
     
   }
   constructor(private cs: ChoiceService){}
 
+  data(){
+    return {id: this.id, name: this.name, score: this.score, pollId: this.pollId, selected: this.selected};
+  }
+  changeclass() {
+    //console.log(this.id + ' is selected');
+    this.choiceSelected.emit(this.data());
+  }
   increment(){
     this.score = this.score + 1;
-    this.newScore.emit({id: this.id, score: this.score});
   }
   updateScore(){
     this.increment();
-    this.cs.updateChoiceScore(this.score);
+    this.cs.updateChoiceScore(this.id, this.score);
   }
 
 }
